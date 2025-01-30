@@ -13,7 +13,9 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: true,
             webSecurity: false
-        }
+        },
+        resizable: false,
+        icon: '../assets/icon.ico'
     });
 
     Menu.setApplicationMenu(null);
