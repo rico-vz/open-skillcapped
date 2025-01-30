@@ -1,0 +1,69 @@
+/* Modern dark theme Plyr styles */
+:root {
+    --plyr-color-main: #ef4444;
+    --plyr-video-background: #18181b;
+    --plyr-menu-background: #18181b;
+    --plyr-menu-color: #f3f4f6;
+    --plyr-menu-border-color: #27272a;
+    --plyr-audio-controls-background: #18181b;
+    --plyr-audio-control-color: #ef4444;
+    --plyr-range-fill-background: #ef4444;
+    --plyr-range-thumb-background: #ef4444;
+    --plyr-control-icon-size: 18px;
+    --plyr-control-spacing: 10px;
+    --plyr-control-radius: 8px;
+    --plyr-tooltip-radius: 8px;
+    --plyr-tooltip-background: #18181b;
+    --plyr-tooltip-color: #f3f4f6;
+    --plyr-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.plyr--video {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.plyr--video .plyr__control--overlaid {
+    background: rgba(239, 68, 68, 0.8);
+    padding: 20px;
+}
+
+.plyr--video .plyr__control--overlaid:hover {
+    background: rgb(239, 68, 68);
+    transform: scale(1.05);
+}
+
+.plyr__menu__container {
+    border: 1px solid var(--plyr-menu-border-color);
+}
+
+.plyr--full-ui input[type=range] {
+    height: 4px;
+}
+
+.plyr__control:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.plyr__control.plyr__tab-focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.35);
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}

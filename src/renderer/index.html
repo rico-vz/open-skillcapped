@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open SkillCapped</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-black text-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">Open
+            SkillCapped</h1>
+
+        <!-- URL Input Section -->
+        <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800 shadow-lg mb-8">
+            <div class="flex flex-col md:flex-row gap-4 items-end">
+                <div class="flex-grow">
+                    <label for="url" class="block text-sm font-medium text-zinc-400 mb-2">Video URL</label>
+                    <input onkeyup="if (event.key =='Enter') stream()"
+                        class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-colors"
+                        id="url" placeholder="https://www.skill-capped.com/lol/browse/course/52mp48wf42/rbqhsjtg89" />
+                </div>
+                <button
+                    class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 shadow-lg shadow-red-500/20"
+                    onclick="stream()">
+                    Stream
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Display -->
+        <div class="text-center mb-4">
+            <label class="text-lg font-medium text-red-500" id="status"></label>
+            <div id="spinner" class="hidden">
+                <div
+                    class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-500 border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section with Controls -->
+        <div id="videoSection" class="hidden space-y-4">
+            <!-- Plyr video container -->
+            <div class="w-full bg-zinc-900 rounded-xl border border-zinc-800 shadow-lg overflow-hidden">
+                <video id="video" crossorigin="anonymous" playsinline>
+                    <source type="application/x-mpegURL">
+                </video>
+            </div>
+
+            <!-- Download Controls -->
+            <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 shadow-lg">
+                <div class="flex flex-col md:flex-row gap-4 items-end justify-between">
+                    <div class="w-full md:w-1/2">
+                        <label for="resolution" class="block text-sm font-medium text-zinc-400 mb-2">Resolution</label>
+                        <select id="resolution"
+                            class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-colors">
+                            <option value="1500">720p</option>
+                            <option value="2500" selected>1080p</option>
+                            <option value="4500">2160p</option>
+                        </select>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-sm font-medium text-zinc-400 mb-2 invisible">Download</label>
+                        <button onclick="downloadAndMergeVideo()"
+                            class="w-full px-6 py-2 bg-zinc-950 hover:bg-zinc-900 text-white border border-zinc-800 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 shadow-lg">
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="js/videoUtils.js"></script>
+    <script src="js/videoState.js"></script>
+    <script src="js/player.js"></script>
+</body>
+
+</html>
