@@ -1,0 +1,22 @@
+{
+  "name": "open-skillcapped",
+  "version": "1.0.0",
+  "description": "OpenSkillcapped",
+  "homepage": "https://github.com/rico-vz/open-skillcapped#readme",
+  "bugs": {
+    "url": "https://github.com/rico-vz/open-skillcapped/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rico-vz/open-skillcapped.git"
+  },
+  "license": "MIT",
+  "author": "Rico van Zelst",
+  "main": "src/main.js",
+  "devDependencies": {
+    "electron": "^34.0.2"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
