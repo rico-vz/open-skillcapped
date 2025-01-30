@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const createWindow = () => {
     const preloadPath = path.join(__dirname, 'preload.js');
+    const iconPath = path.join(__dirname, '..', 'assets', process.platform === 'win32' ? 'icon.ico' : 'icon.png');
 
     const mainWindow = new BrowserWindow({
         width: 1280,
@@ -15,7 +16,7 @@ const createWindow = () => {
             webSecurity: false
         },
         resizable: false,
-        icon: '../assets/icon.ico'
+        icon: iconPath
     });
 
     Menu.setApplicationMenu(null);
