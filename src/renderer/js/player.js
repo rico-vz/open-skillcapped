@@ -53,43 +53,62 @@ class VideoPlayer {
 
         const selectedResolution = document.getElementById('resolution').value;
         const tsFileContents = [];
-        this.state.statusLabel.innerText = 'Downloading...';
+        let totalParts = 0;
 
         try {
             for (let i = 1; i <= MAX_PARTS; i++) {
                 const tsUrl = `${CLOUDFRONT_URL}/${this.state.currentVideoId}/HIDDEN${selectedResolution}-${String(i).padStart(5, '0')}.ts`;
+                const resp = await fetch(tsUrl, { method: 'HEAD' });
+                if (resp.status !== 200) break;
+                totalParts = i;
+            }
 
+            this.state.statusLabel.innerText = 'Downloading...';
+
+            for (let i = 1; i <= totalParts; i++) {
+                const tsUrl = `${CLOUDFRONT_URL}/${this.state.currentVideoId}/HIDDEN${selectedResolution}-${String(i).padStart(5, '0')}.ts`;
                 const resp = await fetch(tsUrl);
                 if (resp.status !== 200) break;
 
                 const tsData = await resp.arrayBuffer();
-                tsFileContents.push(tsData);
+                tsFileContents.push(new Uint8Array(tsData));
+
+                const progress = Math.round((i / totalParts) * 100);
+                this.state.statusLabel.innerText = `Downloading... ${progress}%`;
             }
 
             if (tsFileContents.length === 0) {
                 throw new Error('Error downloading video parts');
             }
 
-            await this.createAndDownloadBlob(tsFileContents);
+            this.state.statusLabel.innerText = 'Merging files...';
+            const mergedTsData = new Uint8Array(tsFileContents.reduce((acc, curr) => acc + curr.length, 0));
+            let offset = 0;
+            for (const tsData of tsFileContents) {
+                mergedTsData.set(tsData, offset);
+                offset += tsData.length;
+            }
 
-            this.state.statusLabel.innerText = 'Finished';
+            this.state.statusLabel.innerText = 'Converting to MP4...';
+            const result = await window.converter.convertToMp4(mergedTsData);
+
+            if (result.canceled) {
+                this.state.statusLabel.innerText = 'Download cancelled';
+                setTimeout(() => {
+                    this.state.statusLabel.innerText = '';
+                }, 2000);
+                return;
+            }
+
+            this.state.statusLabel.innerText = 'Download complete!';
             setTimeout(() => {
                 this.state.statusLabel.innerText = '';
-            }, 1000);
+            }, 2000);
 
         } catch (error) {
             this.state.statusLabel.innerText = error.message;
+            console.error('Download error:', error);
         }
-    }
-
-    createAndDownloadBlob(tsFileContents) {
-        const mergedVideoBlob = new Blob(tsFileContents, { type: 'video/mp2t' });
-        const downloadLink = document.createElement('a');
-        downloadLink.href = URL.createObjectURL(mergedVideoBlob);
-        downloadLink.download = `${this.state.currentVideoId}.ts`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
     }
 }
 
