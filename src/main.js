@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
 const fs = require('fs');
 
@@ -15,6 +15,8 @@ const createWindow = () => {
             webSecurity: false
         }
     });
+
+    Menu.setApplicationMenu(null);
 
     mainWindow.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
         callback({ requestHeaders: { Origin: '*', ...details.requestHeaders } });
