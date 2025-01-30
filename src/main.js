@@ -1,8 +1,11 @@
 const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
 const fs = require('fs');
+const { updateElectronApp } = require('update-electron-app');
 
 const createWindow = () => {
+    updateElectronApp();
+    
     const preloadPath = path.join(__dirname, 'preload.js');
     const iconPath = path.join(__dirname, '..', 'assets', process.platform === 'win32' ? 'icon.ico' : 'icon.png');
 

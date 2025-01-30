@@ -7,6 +7,18 @@ module.exports = {
     asar: true,
     icon: path.join(__dirname, 'assets', 'icon')
   },
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'rico-vz',
+          name: 'open-skillcapped'
+        },
+        prerelease: true
+      }
+    }
+  ],
   rebuildConfig: {},
   makers: [
     {
