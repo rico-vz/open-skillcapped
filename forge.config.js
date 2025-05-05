@@ -4,8 +4,10 @@ const path = require('path');
 
 module.exports = {
   packagerConfig: {
-    asar: true,
-    icon: path.join(__dirname, 'assets', 'icon')
+    asar: {
+      unpack: "**/{ffmpeg-static,ffmpeg-static/**}"
+    },
+    icon: path.join(__dirname, 'assets', 'icon'),
   },
   publishers: [
     {
@@ -24,7 +26,8 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        setupIcon: path.join(__dirname, 'assets', 'icon.ico')
+        setupIcon: path.join(__dirname, 'assets', 'icon.ico'),
+        asarUnpack: ["**/{ffmpeg-static,ffmpeg-static/**}"]
       },
     },
     {

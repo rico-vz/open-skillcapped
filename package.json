@@ -1,6 +1,6 @@
 {
   "name": "open-skillcapped",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Watch and download SkillCapped videos without logging into your account.",
   "homepage": "https://github.com/rico-vz/open-skillcapped#readme",
   "bugs": {
@@ -19,7 +19,7 @@
     "@electron-forge/maker-rpm": "^7.6.1",
     "@electron-forge/maker-squirrel": "^7.6.1",
     "@electron-forge/maker-zip": "^7.6.1",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.6.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.0",
     "@electron-forge/plugin-fuses": "^7.6.1",
     "@electron-forge/publisher-github": "^7.6.1",
     "@electron/fuses": "^1.8.0",
