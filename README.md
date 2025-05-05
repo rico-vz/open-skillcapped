@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 ![Electron.js](https://img.shields.io/badge/Electron-191970?style=flat&logo=Electron&logoColor=white)
-![GitHub Release](https://img.shields.io/github/v/release/rico-vz/open-skillcapped?include_prereleases&color=red)
+![GitHub Release](https://img.shields.io/github/v/release/rico-vz/open-skillcapped?color=red)
 
 </div>
 
